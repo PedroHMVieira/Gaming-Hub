@@ -6,7 +6,12 @@ export const getAllGenres = async (
   res: Response
 ): Promise<Response> => {
   try {
-    const genres = await Genre.findAll();
+    const loggedUserId = (req as any).user?.id;
+
+    const genres = await Genre.findAll({
+      where: { userId: loggedUserId }
+    });
+
     return res.status(200).json(genres);
   } catch (error) {
     return res.status(500).json({
@@ -22,7 +27,13 @@ export const createGenre = async (
 ): Promise<Response> => {
   try {
     const { name } = req.body;
-    const newGenre = await Genre.create({ name });
+    const loggedUserId = (req as any).user?.id;
+
+    const newGenre = await Genre.create({
+      name,
+      userId: loggedUserId
+    } as any);
+
     return res.status(201).json(newGenre);
   } catch (error) {
     return res.status(500).json({
@@ -39,10 +50,14 @@ export const updateGenre = async (
   try {
     const { id } = req.params;
     const { name } = req.body;
-    const genre = await Genre.findByPk(id);
+    const loggedUserId = (req as any).user?.id;
+
+    const genre = await Genre.findOne({
+      where: { id, userId: loggedUserId }
+    });
 
     if (!genre) {
-      return res.status(404).json({ message: "Gênero não encontrado" });
+      return res.status(404).json({ message: "Gênero não encontrado ou sem permissão" });
     }
 
     await genre.update({ name });
@@ -61,10 +76,14 @@ export const deleteGenre = async (
 ): Promise<Response> => {
   try {
     const { id } = req.params;
-    const genre = await Genre.findByPk(id);
+    const loggedUserId = (req as any).user?.id;
+
+    const genre = await Genre.findOne({
+      where: { id, userId: loggedUserId }
+    });
 
     if (!genre) {
-      return res.status(404).json({ message: "Gênero não encontrado" });
+      return res.status(404).json({ message: "Gênero não encontrado ou sem permissão" });
     }
 
     await genre.destroy();

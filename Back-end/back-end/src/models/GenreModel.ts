@@ -13,6 +13,8 @@ class Genres extends Model<
 > {
   declare id: CreationOptional<number>;
   declare name: string;
+  // Adicionado para controle de propriedade
+  declare userId: number;
 }
 
 Genres.init(
@@ -26,11 +28,21 @@ Genres.init(
       type: DataTypes.STRING,
       allowNull: false,
     },
+    // Chave estrangeira para o usuário criador
+    userId: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      references: {
+        model: "users",
+        key: "id",
+      },
+    },
   },
   {
     sequelize,
     modelName: "Genre",
     tableName: "genres",
+    timestamps: true, // Útil para ordenar os gêneros criados recentemente
   }
 );
 

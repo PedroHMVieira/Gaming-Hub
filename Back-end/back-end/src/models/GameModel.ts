@@ -17,7 +17,8 @@ class Game extends Model<
   declare id: CreationOptional<number>;
   declare title: string;
   declare description: string;
-
+  declare userId: number;
+  declare coverImage: CreationOptional<string | null>;
   declare assessments?: AssessmentModel[];
 
   declare addDevelopers: BelongsToManyAddAssociationsMixin<any, number>;
@@ -36,14 +37,27 @@ Game.init(
       allowNull: false,
     },
     description: {
-      type: DataTypes.STRING,
+      type: DataTypes.TEXT,
       allowNull: false,
+    },
+    userId: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      references: {
+        model: "users",
+        key: "id",
+      },
+    },
+    coverImage: {
+      type: DataTypes.STRING,
+      allowNull: true,
     },
   },
   {
     sequelize,
     modelName: "Game",
     tableName: "games",
+    timestamps: true,
   }
 );
 

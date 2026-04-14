@@ -9,8 +9,6 @@ export const authMiddleware = (
 ) => {
   const token = req.header("Authorization")?.replace("Bearer ", "");
 
-  console.log("Token recebido:", token);
-
   if (!token) {
     return res.status(401).json({ error: "Access denied. No token" });
   }
@@ -18,9 +16,7 @@ export const authMiddleware = (
   try {
     const decoded = verifyToken(token) as JwtPayload;
 
-    console.log("Token decodificado:", decoded);
-
-    req.body.user = decoded;
+    (req as any).user = decoded;
 
     next();
   } catch (error) {

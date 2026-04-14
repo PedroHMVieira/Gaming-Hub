@@ -22,9 +22,22 @@ function Home() {
   useEffect(() => {
     const fetchGames = async () => {
       try {
-        const response = await fetch("http://localhost:3000/games");
+
+        const token = localStorage.getItem("token");
+
+
+        const response = await fetch("http://localhost:3000/games", {
+          headers: {
+            "Authorization": `Bearer ${token}`,
+            "Content-Type": "application/json"
+          }
+        });
+
         const data = await response.json();
-        setGames(Array.isArray(data) ? data.slice(0, 3) : []);
+
+        const gamesList = data.data || data;
+
+        setGames(Array.isArray(gamesList) ? gamesList.slice(0, 3) : []);
       } catch (error) {
         console.error("Erro ao buscar jogos da home:", error);
       } finally {
