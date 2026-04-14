@@ -30,56 +30,51 @@ const Header: React.FC = () => {
     setTimeout(() => navigate("/login", { replace: true }), 0);
   };
 
-  // 1. Atualizamos os nomes e os paths aqui!
   const menuItems = [
-    { label: "Início", path: "/", icon: <HomeIcon className="w-4 h-4" /> },
-    { label: "Jogos", path: "/jogos", icon: <Gamepad2 className="w-4 h-4" /> },
-    { label: "Devs", path: "/desenvolvedores", icon: <Users className="w-4 h-4" /> },
-    { label: "Gêneros", path: "/generos", icon: <Tag className="w-4 h-4" /> },
-    { label: "Sobre", path: "/sobre", icon: <Info className="w-4 h-4" /> },
-    { label: "Contato", path: "/contato", icon: <Mail className="w-4 h-4" /> },
+    { label: "Início", path: "/", icon: <HomeIcon className="w-5 h-5" /> },
+    { label: "Jogos", path: "/jogos", icon: <Gamepad2 className="w-5 h-5" /> },
+    { label: "Devs", path: "/desenvolvedores", icon: <Users className="w-5 h-5" /> },
+    { label: "Gêneros", path: "/generos", icon: <Tag className="w-5 h-5" /> },
+    { label: "Sobre", path: "/sobre", icon: <Info className="w-5 h-5" /> },
+    { label: "Contato", path: "/contato", icon: <Mail className="w-5 h-5" /> },
   ];
 
   return (
-    <header className="bg-slate-950/80 backdrop-blur-xl shadow-2xl border-b border-white/10 sticky top-0 z-50 py-3 px-6">
-      <nav className="flex items-center justify-between max-w-7xl mx-auto w-full">
+    <header className="bg-slate-950/80 backdrop-blur-xl shadow-2xl border-b border-white/10 sticky top-0 z-50 py-4 px-6">
+      <nav className="flex items-center justify-between w-full px-4 md:px-10">
 
-        {/* Logo - Agora com ícone de controle */}
-        <Link to="/" className="flex items-center gap-2 group">
-          <div className="bg-purple-600 p-2 rounded-lg group-hover:bg-purple-500 transition-colors">
-            <Gamepad2 className="text-white w-6 h-6" />
+        <Link to="/" className="flex items-center gap-3 group">
+          <div className="bg-purple-600 p-2.5 rounded-lg group-hover:bg-purple-500 transition-colors shadow-lg shadow-purple-500/20">
+            <Gamepad2 className="text-white w-7 h-7" />
           </div>
-          <span className="font-black text-xl tracking-tighter text-white">
+          <span className="font-black text-2xl tracking-tighter text-white">
             GAME<span className="text-purple-500">PORTAL</span>
           </span>
         </Link>
 
-        {/* Mobile Menu Toggle */}
         <button className="md:hidden text-white p-2" onClick={toggleMenu}>
-          {isMenuOpen ? <X /> : <Menu />}
+          {isMenuOpen ? <X size={28} /> : <Menu size={28} />}
         </button>
 
-        {/* Desktop Menu */}
-        <ul className="hidden md:flex space-x-6 items-center">
+        <ul className="hidden md:flex space-x-8 items-center">
           {menuItems.map((item) => (
             <li key={item.label}>
               <Link
                 to={item.path}
-                className="flex items-center gap-1.5 text-sm font-medium text-slate-300 hover:text-purple-400 transition-colors"
+                className="flex items-center gap-2 text-base font-semibold text-slate-300 hover:text-purple-400 transition-all hover:scale-105"
               >
-                {item.icon}
+                <span className="text-purple-500/70">{item.icon}</span>
                 {item.label}
               </Link>
             </li>
           ))}
 
-          {/* User Info & Profile */}
-          <div className="h-6 w-[1px] bg-white/10 mx-2" />
+          <div className="h-8 w-[1px] bg-white/10 mx-4" />
 
-          <Link to="/minha-conta" className="flex items-center gap-2 hover:opacity-80 transition-opacity">
+          <Link to="/minha-conta" className="flex items-center gap-3 hover:opacity-80 transition-opacity">
             {userName && (
-              <div className="flex items-center gap-2 bg-purple-500/10 border border-purple-500/20 px-3 py-1.5 rounded-full text-xs font-bold text-purple-400 shadow-inner">
-                <User className="w-3 h-3" />
+              <div className="flex items-center gap-2 bg-purple-500/10 border border-purple-500/20 px-4 py-2 rounded-full text-sm font-bold text-purple-400 shadow-inner">
+                <User className="w-4 h-4" />
                 <span>{userName.toUpperCase()}</span>
               </div>
             )}
@@ -87,31 +82,30 @@ const Header: React.FC = () => {
 
           <button
             onClick={handleLogout}
-            className="flex items-center gap-1 bg-red-500/10 text-red-500 border border-red-500/20 px-3 py-1.5 rounded-lg hover:bg-red-500 hover:text-white transition-all text-xs font-bold"
+            className="flex items-center gap-2 bg-red-500/10 text-red-500 border border-red-500/20 px-4 py-2 rounded-lg hover:bg-red-500 hover:text-white transition-all text-sm font-bold active:scale-95"
           >
-            <LogOut className="w-3 h-3" />
+            <LogOut className="w-4 h-4" />
             SAIR
           </button>
         </ul>
 
-        {/* Mobile Menu Dropdown */}
         {isMenuOpen && (
-          <ul className="absolute top-full left-0 w-full bg-slate-900 border-b border-white/10 flex flex-col p-4 md:hidden z-50 animate-in slide-in-from-top duration-300">
+          <ul className="absolute top-full left-0 w-full bg-slate-900 border-b border-white/10 flex flex-col p-6 md:hidden z-50 animate-in slide-in-from-top duration-300">
             {menuItems.map((item) => (
-              <li key={item.label} className="py-3 border-b border-white/5 last:border-none">
+              <li key={item.label} className="py-4 border-b border-white/5 last:border-none">
                 <Link
                   to={item.path}
                   onClick={() => setIsMenuOpen(false)}
-                  className="flex items-center gap-3 text-slate-300"
+                  className="flex items-center gap-4 text-lg text-slate-300 font-medium"
                 >
-                  {item.icon}
+                  <span className="text-purple-500">{item.icon}</span>
                   {item.label}
                 </Link>
               </li>
             ))}
-            <li className="py-3">
-              <button onClick={handleLogout} className="flex items-center gap-3 text-red-400 font-bold">
-                <LogOut className="w-4 h-4" /> Sair da Conta
+            <li className="py-4">
+              <button onClick={handleLogout} className="flex items-center gap-4 text-red-400 font-bold text-lg">
+                <LogOut className="w-5 h-5" /> Sair da Conta
               </button>
             </li>
           </ul>

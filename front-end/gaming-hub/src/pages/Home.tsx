@@ -37,7 +37,7 @@ function Home() {
 
   return (
     <>
-      <main className="max-w-[1220px] px-4 m-auto py-10">
+      <main className="w-full px-6 py-10">
 
         <div className="flex flex-col items-center justify-center gap-4 pb-12">
           <img src={logoPortal} alt="GamePortal Logo" className="h-32 w-auto animate-pulse" />
