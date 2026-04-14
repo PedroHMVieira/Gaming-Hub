@@ -175,7 +175,7 @@ const Jogos = () => {
             <Gamepad2 className="w-12 h-12 text-purple-500" /> GAME HUB
           </h2>
           <p className="text-slate-300 text-lg md:text-xl max-w-3xl font-light leading-relaxed">
-            Sua biblioteca pessoal de projetos. Organize suas mecânicas, notas de desenvolvimento e acompanhe a evolução das suas criações de forma privada.
+            Sua biblioteca pessoal de jogos, salve suas gameplays, organize seus jogos zerados e deixe registrado suas lembranças epicas.
           </p>
         </CardContent>
       </Card>

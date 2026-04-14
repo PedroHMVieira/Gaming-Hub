@@ -72,7 +72,7 @@ function Home() {
             </h2>
             <p className="text-white mb-4 leading-relaxed font-light">
               🕹️ Bem-vindo ao GamePortal! Este é um espaço feito para entusiastas de games.
-              Aqui você pode consultar detalhes de títulos, conhecer os desenvolvedores e ler o que outros jogadores acharam.
+              Aqui você pode registrar suas experiências, avaliar suas gameplays e guardar memórias de suas jornadas virtuais.
             </p>
           </CardContent>
         </Card>
